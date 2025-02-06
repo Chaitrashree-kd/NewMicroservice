@@ -95,7 +95,7 @@ pipeline {
                         kubectl config use-context minikube
                     '''
                     bat """
-                        kubectl apply -f k8s/backend-deployment.yaml
+                        kubectl apply -f backend/backend-deployment.yaml
                     """
                     echo 'Deployment to Minikube complete!'
                     bat '''
@@ -108,10 +108,10 @@ pipeline {
         stage('Deploy to IBM Cloud') {
             steps {
                 script {
-                    if (fileExists('k8s/backend-deployment.yaml')) {
+                    if (fileExists('backend/backend-deployment.yaml')) {
                         echo 'Deploying to IBM Cloud...'
                         bat '''
-                            kubectl apply -f k8s/backend-deployment.yaml
+                            kubectl apply -f backend/backend-deployment.yaml
                         '''
                         echo 'Deployment to IBM Cloud complete!'
                     } else {
